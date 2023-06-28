@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+          crossorigin="anonymous">
+
+</head>
+<body>
+
+<div class="container-fluid">
+    <!---шапка-->
+        <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+            <span class="navbar-brand">
+                <h5 class="navbar-brand col-md-3 col-lg-2 mr-0 px-3">
+                    <span id="userHeader"></span> with roles:
+                    <span id="userHeader2"></span>
+                </h5>
+            </span>
+            <ul class="navbar-nav px-3">
+                <li class="nav-item text-nowrap">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </nav>
+
+<div class="row">
+    <div class="col-2">
+    <!---vertical pills--->
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Admin</a>
+        <a class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">User</a>
+    </div>
+    </div>
+    <!---pills insides--->
+    <div class="col-10 bg-light">
+    <div class="tab-content" id="v-pills-tabContent">
+        <!---admin page--->
+        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+            <div class="page-header">
+                <h2>Admin panel</h2>
+            </div>
+            <nav class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Users table</a>
+                <a class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">New user</a>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <!-- table -->
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>All users</h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped table-sm">
+                                <!--- column names --->
+                                <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Age</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Delete</th>
+                                </tr>
+                                </thead>
+                                <tbody id="table-body">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- form -->
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Add new user</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="container mt-2 col-sm-4 text-center">
+                                <form id="newUserForm" name="NewUserForm">
+                                    <div class="form-group">
+                                        <label for="newFirstName"><strong>First name</strong></label>
+                                        <input type="text" class="form-control"
+                                               id="newFirstName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="newLastName"><strong>Last name</strong></label>
+                                        <input type="text" class="form-control"
+                                               id="newLastName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="newage"><strong>Age</strong></label>
+                                        <input type="number" class="form-control"
+                                               id="newage">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="newemail"><strong>Email</strong></label>
+                                        <input type="email" class="form-control"
+                                               id="newemail">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="newpassword"><strong>Password</strong></label>
+                                        <input type="password" class="form-control"
+                                               id="newpassword">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="roleNew"><strong>Role</strong></label>
+                                        <select class="form-select" multiple size="2" id="roleNew" name="roleSelect">
+                                            <option value="2">ADMIN</option>
+                                            <option selected value="1">USER</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Add new user</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!---user page(done) --->
+        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="profile-tab">
+            <h2>User information-page</h2>
+            <div class="card">
+                <div class="card-header">
+                    <h5>About user</h5>
+                </div>
+                <div class="card-body">
+                    <!----card body--->
+                    <table class="table table-striped table-sm">
+                        <!---top--->
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Role</th>
+                        </tr>
+                        </thead>
+                        <tbody id="authUserInfo">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+<!---edit modal--->
+<div class="modal fade" id="modalEdit">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit user</h5>
+                <button type="button" id="ed_close" class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <form id="editForm">
+            <div class="modal-body text-center">
+
+                <div class="controls">
+
+                        <div class="form-group">
+                            <label for="idEdit"><strong>ID</strong></label>
+                            <input class="form-control" name="id" type="number"
+                                   id="idEdit" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstnameEdit"><strong>First name</strong></label>
+                            <input class="form-control" name="firstName" type="text"
+                                   id="firstnameEdit">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastNameEdit"><strong>Last name</strong></label>
+                            <input class="form-control" name="lastName" type="text"
+                                   id="lastNameEdit">
+                        </div>
+                        <div class="form-group">
+                            <label for="ageEdit"><strong>Age</strong></label>
+                            <input type="number"
+                                   class="form-control"
+                                   name="age"
+                                   id="ageEdit">
+                        </div>
+                        <div class="form-group">
+                            <label for="emailEdit"><strong>Email</strong></label>
+                            <input type="text"
+                                   class="form-control"
+                                   name="email"
+                                   id="emailEdit">
+                        </div>
+                        <div class="form-group">
+                            <label for="passwordEdit"><strong>Password</strong></label>
+                            <input type="password"
+                                   class="form-control"
+                                   name="password"
+                                   id="passwordEdit">
+                        </div>
+                        <div class="form-group">
+                            <label for="rolesEdit"><b>Role</b></label>
+                            <select name="roles" multiple class="form-control form-control-sm"
+                                    id="rolesEdit"
+                                    size="3" required>
+                                <option id="userEditO" value="1">USER</option>
+                                <option id="adminEditO" value="2">ADMIN</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="footered" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Close</button>
+                    <button id="buttonCreate" type="submit" class="btn btn-primary">Edit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!---delete modal--->
+<div class="modal fade" id="deleteModal"
+     tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete user</h5>
+                <button type="button" id="deleteClose" class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <form id="del_form">
+                <div class="modal-body text-center">
+
+                    <div class="controls">
+                        <div class="form-group">
+                            <label for="idDelete"><strong>ID</strong></label>
+                            <input name="id"
+                                   th:type="text"
+                                   id="idDelete"
+                                   type="number" class="form-control" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstNameDelete"><strong>First name</strong></label>
+                            <input name="firstName"
+                                   id="firstNameDelete"
+                                   th:type="text" class="form-control" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastNameDelete"><strong>Last name</strong></label>
+                            <input name="lastName"
+                                   id="lastNameDelete"
+                                   th:type="text" class="form-control" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="ageDelete"><strong>Age</strong></label>
+                            <input name="age"
+                                   id="ageDelete"
+                                   th:type="number" class="form-control" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="emailDelete"><strong>Email</strong></label>
+                            <input name="email"
+                                   id="emailDelete"
+                                   th:type="email" class="form-control" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="rolesDelete"><b>Role</b></label>
+                            <input readonly type="text" class="form-control"name="role" id="rolesDelete">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="footerdel" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Close
+                    </button>
+                    <button id="deleteBtn"
+                            class="btn btn-danger"
+                            type="submit">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<script th:src="@{/js/editUser.js}" type="module" src="D:\java\javaprj\kata_3_1_4\src\main\resources\static\js\editUser.js"></script>
+<script th:src="@{/js/newUser.js}" type="module" src="D:\java\javaprj\kata_3_1_4\src\main\resources\static\js\newUser.js"></script>
+<script th:src="@{/js/deleteUser.js}" type="module" src="D:\java\javaprj\kata_3_1_4\src\main\resources\static\js\deleteUser.js"></script>
+<script th:src="@{/js/app.js}" type="module" src="D:\java\javaprj\kata_3_1_4\src\main\resources\static\js\app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+</body>
+</html>
